@@ -45,7 +45,9 @@
   "An alist of nicks that have triggered notifications in the last
 `circe-notifications-wait-for' seconds.")
 
-(defcustom circe-notifications-alert-style 'libnotify
+(defcustom circe-notifications-alert-style (cl-case system-type
+                                              (gnu/linux 'libnotify)
+                                              (darwin 'osx-notifier))
   "`alert' style to use.  See `alert-styles' for a list of possibilities.  You
 can also define your own."
   :type 'symbol
